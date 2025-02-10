@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://kqxf0np1isp5"]
+
+[ext_resource type="Texture2D" uid="uid://dy6xnixykfcq6" path="res://Assets/Yes_button.png" id="1_irk7r"]
+[ext_resource type="Texture2D" uid="uid://cmj4xsfgxb6ux" path="res://Assets/Yes_button_pressed.png" id="2_ygscb"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -23.0
+offset_top = -15.0
+offset_right = 23.0
+offset_bottom = 15.0
+texture_normal = ExtResource("1_irk7r")
+texture_pressed = ExtResource("2_ygscb")

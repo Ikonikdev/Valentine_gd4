@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://r42xxm8f5iek"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g1giw"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1500, 1, 1)
+direction = Vector3(1, 1, 0)
+spread = 10.0
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 5, 0)
+scale_min = 2.0
+scale_max = 5.0
+color = Color(1, 0.646232, 0.667228, 1)
+
+[node name="Particle system" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(512, 0)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_g1giw")
+lifetime = 20.0

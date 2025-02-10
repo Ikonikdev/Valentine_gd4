@@ -1,0 +1,39 @@
+extends Node2D
+
+@export var base_speed: float = 500.0
+@export var max_speed: float = 15000.0
+@export var evade_radius: float = 300.0
+@export var smoothness: float = 0.1
+var screen_size  # Tamaño de la pantalla
+
+func _ready():
+	screen_size = get_viewport_rect().size  # Obtiene el tamaño de la pantalla
+
+func _process(delta):
+	var mouse_position = get_global_mouse_position()
+	var direction = global_position - mouse_position
+	var distance = direction.length()
+
+	if distance < evade_radius:
+		direction = direction.normalized()
+		
+		# Ajustamos la velocidad según la distancia
+		var speed_factor = 1.0 - (distance / evade_radius)
+		var current_speed = base_speed + (max_speed - base_speed) * speed_factor
+
+		# Calculamos la nueva posición
+		var target_position = global_position + direction * current_speed * delta
+		
+		# Corrección si el objeto se acerca a los bordes
+		target_position = clamp_to_screen(target_position)
+		
+		# Aplicamos el movimiento suavizado
+		global_position = lerp(global_position, target_position, smoothness)
+	
+
+
+func clamp_to_screen(position: Vector2) -> Vector2:
+	var margin = 20.0  # Margen de seguridad para evitar pegarse a los bordes
+	var clamped_x = clamp(position.x, margin, screen_size.x - margin)
+	var clamped_y = clamp(position.y, margin, screen_size.y - margin)
+	return Vector2(clamped_x, clamped_y)
